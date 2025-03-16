@@ -27,8 +27,8 @@ def generate_table(features, results):
     table.add_column("Feature", justify="right", style="cyan", no_wrap=True)
     table.add_column("Success Rate (%)", style="green")
     table.add_column("Simulations Completed", style="magenta")
+    table.add_column("Last Simulation Duration", style="yellow")
     table.add_column("Average Duration", style="yellow")
-    table.add_column("Median Duration", style="yellow")
     table.add_column("Min Duration", style="yellow")
     table.add_column("Max Duration", style="yellow")
 
@@ -38,8 +38,8 @@ def generate_table(features, results):
             feature.name,
             f"{result.success_rate:.2f}",
             f"{result.total_simulations}",
+            f"{result.total_durations[-1]:.2f}" if result.total_durations else "N/A",
             f"{result.average_completion_duration:.2f}",
-            f"{result.median_completion_duration:.2f}",
             f"{result.min_completion_duration:.2f}",
             f"{result.max_completion_duration:.2f}"
         )
