@@ -15,6 +15,10 @@ from team import Team
 results = {}
 features = []
 
+def calculate_naive_success_rate(feature, desired_duration):
+    total_duration = sum(story.team.avg_time for story in feature.stories)
+    return 100 if total_duration < desired_duration else 0
+
 def monte_carlo_simulation(feature):
     total_duration = 0
     for story in feature.stories:
@@ -22,10 +26,11 @@ def monte_carlo_simulation(feature):
         total_duration += duration
     return total_duration
 
-def generate_table(features, results):
+def generate_table(features, results, desired_duration):
     table = Table(title="Simulation Results")
     table.add_column("Feature", justify="right", style="cyan", no_wrap=True)
     table.add_column("Success Rate (%)", style="green")
+    table.add_column("Average-Based Success Rate (%)", style="red")
     table.add_column("Simulations Completed", style="magenta")
     table.add_column("Last Simulation Duration", style="yellow")
     table.add_column("Average Duration", style="yellow")
@@ -34,7 +39,38 @@ def generate_table(features, results):
 
     for feature in features:
         result = results[feature.name]
+        naive_success_rate = calculate_naive_success_rate(feature, desired_duration)
         table.add_row(
+            feature.name,
+            f"{result.success_rate:.2f}",
+            f"{naive_success_rate:.2f}",
+            f"{result.total_simulations}",
+            f"{result.total_durations[-1]:.2f}" if result.total_durations else "N/A",
+            f"{result.average_completion_duration:.2f}",
+            f"{result.min_completion_duration:.2f}",
+            f"{result.max_completion_duration:.2f}"
+        )
+
+    return table
+    total_duration = sum(story.team.avg_time for story in feature.stories)
+    return 100 if total_duration < desired_duration else 0
+    table = Table(title="Simulation Results")
+    table.add_column("Feature", justify="right", style="cyan", no_wrap=True)
+    table.add_column("Success Rate (%)", style="green")
+    table.add_column("Simulations Completed", style="magenta")
+    table.add_column("Naive Success Rate (%)", style="red")
+    table.add_column("Last Simulation Duration", style="yellow")
+    table.add_column("Average Duration", style="yellow")
+    table.add_column("Min Duration", style="yellow")
+    table.add_column("Max Duration", style="yellow")
+
+    for feature in features:
+        result = results[feature.name]
+        naive_success_rate = calculate_naive_success_rate(feature, desired_duration)
+        table.add_row(
+            feature.name,
+            f"{result.success_rate:.2f}",
+            f"{naive_success_rate:.2f}",
             feature.name,
             f"{result.success_rate:.2f}",
             f"{result.total_simulations}",
@@ -62,13 +98,13 @@ def main(desired_duration=10, num_simulations=1000):
 
     # Print additional simulation information
     console = Console()
-    with Live(generate_table(features, results), console=console, refresh_per_second=4) as live:
+    with Live(generate_table(features, results, desired_duration), console=console, refresh_per_second=4) as live:
         for sim_number in range(num_simulations-1):
             for feature in features:
                 result = results[feature.name]
                 total_duration = monte_carlo_simulation(feature)
                 result.update(total_duration, desired_duration)
-            live.update(generate_table(features, results))
+            live.update(generate_table(features, results, desired_duration))
             time.sleep(1/(sim_number+1))
 
 if __name__ == "__main__":

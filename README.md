@@ -10,7 +10,7 @@ This project uses a Monte Carlo simulation to estimate the completion duration o
 
 Monte Carlo simulations provide better accuracy than simply using the average completion time for a team. By utilizing the minimum and maximum time estimates and introducing randomness over many iterations, the simulation can derive a confidence interval that is significantly more reliable. This approach captures the variability and uncertainty inherent in real-world scenarios, offering a more comprehensive understanding of potential outcomes.
 
-[![asciicast](https://asciinema.org/a/Hpskwf2ITzJBQsTgobq0Wfolx.svg)](https://asciinema.org/a/Hpskwf2ITzJBQsTgobq0Wfolx)
+[![asciicast](https://asciinema.org/a/KEMcnikpVzbX1x67bTU0fEUFn.svg)](https://asciinema.org/a/KEMcnikpVzbX1x67bTU0fEUFn)
 
 
 ### Key Components
