@@ -15,10 +15,11 @@ class Feature:
                     team = next((team for team in teams if team.name == story_data['team']), None)
                     if team:
                         stories.append(Story(name=story_data['name'], team=team))
-                features.append(Feature(name=feature_data['name'], stories=stories))
+                features.append(Feature(name=feature_data['name'], rank=feature_data['rank'], stories=stories))
             return features
-    def __init__(self, name, stories=None):
+    def __init__(self, name, rank, stories=None):
         self.name = name
+        self.rank = rank
         self.stories = stories if stories is not None else []
 
     def add_story(self, story):

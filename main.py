@@ -16,11 +16,11 @@ results = {}
 features = []
 
 def monte_carlo_simulation(feature, desired_completion_duration, num_simulations=1000):
-    result = SimulationResult()
-    for _ in range(num_simulations):
-        total_duration = sum(random.uniform(story.team.min_time, story.team.max_time) for story in feature.stories)
-        result.update(total_duration, desired_completion_duration)
-    return result
+    total_duration = 0
+    for story in feature.stories:
+        duration = random.uniform(story.team.min_time, story.team.max_time)
+        total_duration += duration
+    return total_duration
 
 def generate_table(features, results):
     table = Table(title="Simulation Results")
@@ -49,20 +49,22 @@ def generate_table(features, results):
 def main(desired_duration=10, num_simulations=1000):
     # Load teams and features from YAML fixtures
     teams = Team.from_yaml('fixtures/teams.yaml')
-    features = Feature.from_yaml('fixtures/features.yaml', teams)
+    features = sorted(Feature.from_yaml('fixtures/features.yaml', teams), key=lambda f: f.rank, reverse=True)
 
     console = Console()
     for feature in features:
         results[feature.name] = SimulationResult()
+
+        # Run the first simulation
         result = results[feature.name]
-        total_duration = sum(random.uniform(story.team.min_time, story.team.max_time) for story in feature.stories)
+        total_duration = monte_carlo_simulation(feature, desired_duration)
         result.update(total_duration, desired_duration)
 
     with Live(generate_table(features, results), console=console, refresh_per_second=4) as live:
         for _ in range(num_simulations-1):
             for feature in features:
                 result = results[feature.name]
-                total_duration = sum(random.uniform(story.team.min_time, story.team.max_time) for story in feature.stories)
+                total_duration = monte_carlo_simulation(feature, desired_duration)
                 result.update(total_duration, desired_duration)
             live.update(generate_table(features, results))
             #time.sleep(2)

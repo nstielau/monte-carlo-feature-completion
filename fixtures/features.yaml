@@ -1,70 +1,82 @@
 - name: FEAT-2345
+  rank: 1
   stories:
     - name: Story 1
       team: Team A
     - name: Story 2
       team: Team B
 - name: FEAT-3456
+  rank: 2
   stories:
     - name: Story 3
       team: Team C
     - name: Story 4
       team: Team D
 - name: FEAT-2789
+  rank: 3
   stories:
     - name: Story 5
       team: Team E
     - name: Story 6
       team: Team F
 - name: FEAT-3123
+  rank: 4
   stories:
     - name: Story 7
       team: Team G
     - name: Story 8
       team: Team H
 - name: FEAT-2999
+  rank: 5
   stories:
     - name: Story 9
       team: Team I
     - name: Story 10
       team: Team J
 - name: FEAT-3876
+  rank: 6
   stories:
     - name: Story 11
       team: Team K
     - name: Story 12
       team: Team L
 - name: FEAT-2567
+  rank: 7
   stories:
     - name: Story 13
       team: Team A
     - name: Story 14
       team: Team B
 - name: FEAT-3012
+  rank: 8
   stories:
     - name: Story 15
       team: Team C
     - name: Story 16
       team: Team D
 - name: FEAT-2890
+  rank: 9
   stories:
     - name: Story 17
       team: Team E
     - name: Story 18
       team: Team F
 - name: FEAT-3789
+  rank: 10
   stories:
     - name: Story 19
       team: Team G
     - name: Story 20
       team: Team H
 - name: FEAT-2349
+  rank: 11
   stories:
     - name: Story 21
       team: Team I
     - name: Story 22
       team: Team J
 - name: FEAT-3678
+  rank: 12
   stories:
     - name: Story 23
       team: Team K
