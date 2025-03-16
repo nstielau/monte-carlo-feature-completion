@@ -18,6 +18,31 @@ This project uses a Monte Carlo simulation to estimate the completion duration o
 - **Simulation**: The `monte_carlo_simulation` function in `main.py` runs the simulation for each feature, calculating the total duration based on random story completion times.
 - **Results**: The simulation results are displayed in a table using the `rich` library, showing success rates and duration statistics.
 
+### Example Fixtures
+
+Here is an example of how a Team and a Feature are defined in the YAML fixtures:
+
+#### Team Example
+
+```yaml
+- name: Team A
+  min_time: 1
+  max_time: 10
+  avg_time: 5.5
+```
+
+#### Feature Example
+
+```yaml
+- name: FEAT-2345
+  rank: 1
+  stories:
+    - name: Story 1
+      team: Team A
+    - name: Story 2
+      team: Team B
+```
+
 ### How to Run
 
 To run the simulation, execute the `main.py` script. You can specify the desired completion duration and the number of simulations to run.
