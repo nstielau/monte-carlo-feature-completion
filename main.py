@@ -63,13 +63,13 @@ def main(desired_duration=10, num_simulations=1000):
     # Print additional simulation information
     console = Console()
     with Live(generate_table(features, results), console=console, refresh_per_second=4) as live:
-        for _ in range(num_simulations-1):
+        for sim_number in range(num_simulations-1):
             for feature in features:
                 result = results[feature.name]
                 total_duration = monte_carlo_simulation(feature)
                 result.update(total_duration, desired_duration)
             live.update(generate_table(features, results))
-            #time.sleep(2)
+            time.sleep(1/(sim_number+1))
 
 if __name__ == "__main__":
     fire.Fire(main)
