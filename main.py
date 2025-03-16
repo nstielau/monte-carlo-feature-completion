@@ -51,7 +51,7 @@ def main(desired_duration=10, num_simulations=1000):
     teams = Team.from_yaml('fixtures/teams.yaml')
     features = sorted(Feature.from_yaml('fixtures/features.yaml', teams), key=lambda f: f.rank, reverse=True)
 
-    console = Console()
+    # Setup
     for feature in features:
         results[feature.name] = SimulationResult()
 
@@ -60,6 +60,8 @@ def main(desired_duration=10, num_simulations=1000):
         total_duration = monte_carlo_simulation(feature, desired_duration)
         result.update(total_duration, desired_duration)
 
+    # Print additional simulation information
+    console = Console()
     with Live(generate_table(features, results), console=console, refresh_per_second=4) as live:
         for _ in range(num_simulations-1):
             for feature in features:
