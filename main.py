@@ -15,7 +15,7 @@ from team import Team
 results = {}
 features = []
 
-def monte_carlo_simulation(feature, num_simulations=1000):
+def monte_carlo_simulation(feature):
     total_duration = 0
     for story in feature.stories:
         duration = random.uniform(story.team.min_time, story.team.max_time)
