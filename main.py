@@ -15,7 +15,7 @@ from team import Team
 results = {}
 features = []
 
-def monte_carlo_simulation(feature, desired_completion_duration, num_simulations=1000):
+def monte_carlo_simulation(feature, num_simulations=1000):
     total_duration = 0
     for story in feature.stories:
         duration = random.uniform(story.team.min_time, story.team.max_time)
@@ -57,7 +57,7 @@ def main(desired_duration=10, num_simulations=1000):
 
         # Run the first simulation
         result = results[feature.name]
-        total_duration = monte_carlo_simulation(feature, desired_duration)
+        total_duration = monte_carlo_simulation(feature)
         result.update(total_duration, desired_duration)
 
     # Print additional simulation information
@@ -66,7 +66,7 @@ def main(desired_duration=10, num_simulations=1000):
         for _ in range(num_simulations-1):
             for feature in features:
                 result = results[feature.name]
-                total_duration = monte_carlo_simulation(feature, desired_duration)
+                total_duration = monte_carlo_simulation(feature)
                 result.update(total_duration, desired_duration)
             live.update(generate_table(features, results))
             #time.sleep(2)
