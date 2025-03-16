@@ -8,7 +8,7 @@ The goal of this project is to simulate the completion times of various software
 
 This project uses a Monte Carlo simulation to estimate the completion duration of software features. Each feature consists of multiple stories, and each story is assigned to a team. The simulation uses the minimum and maximum time estimates for each team to generate random completion times for stories, which are then aggregated to determine the total completion time for each feature.
 
-[Watch a demo of the simulation](https://asciinema.org/a/Hpskwf2ITzJBQsTgobq0Wfolx)
+[![asciicast](https://asciinema.org/a/Hpskwf2ITzJBQsTgobq0Wfolx.svg)](https://asciinema.org/a/Hpskwf2ITzJBQsTgobq0Wfolx)
 
 
 ### Key Components
