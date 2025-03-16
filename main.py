@@ -40,39 +40,12 @@ def generate_table(features, results, desired_duration):
     for feature in features:
         result = results[feature.name]
         naive_success_rate = calculate_naive_success_rate(feature, desired_duration)
+        color = "green" if naive_success_rate == 100 else "red" if naive_success_rate == 0 else "white"
+        success_rate_color = "green" if result.success_rate > 90 else "yellow" if result.success_rate >= 60 else "red"
         table.add_row(
             feature.name,
-            f"{result.success_rate:.2f}",
-            f"{naive_success_rate:.2f}",
-            f"{result.total_simulations}",
-            f"{result.total_durations[-1]:.2f}" if result.total_durations else "N/A",
-            f"{result.average_completion_duration:.2f}",
-            f"{result.min_completion_duration:.2f}",
-            f"{result.max_completion_duration:.2f}"
-        )
-
-    return table
-    total_duration = sum(story.team.avg_time for story in feature.stories)
-    return 100 if total_duration < desired_duration else 0
-    table = Table(title="Simulation Results")
-    table.add_column("Feature", justify="right", style="cyan", no_wrap=True)
-    table.add_column("Success Rate (%)", style="green")
-    table.add_column("Simulations Completed", style="magenta")
-    table.add_column("Naive Success Rate (%)", style="red")
-    table.add_column("Last Simulation Duration", style="yellow")
-    table.add_column("Average Duration", style="yellow")
-    table.add_column("Min Duration", style="yellow")
-    table.add_column("Max Duration", style="yellow")
-
-    for feature in features:
-        result = results[feature.name]
-        naive_success_rate = calculate_naive_success_rate(feature, desired_duration)
-        table.add_row(
-            feature.name,
-            f"{result.success_rate:.2f}",
-            f"{naive_success_rate:.2f}",
-            feature.name,
-            f"{result.success_rate:.2f}",
+            f"[{success_rate_color}]{int(result.success_rate):>3}%[/]",
+            f"[{color}]{int(naive_success_rate):>3}%[/]",
             f"{result.total_simulations}",
             f"{result.total_durations[-1]:.2f}" if result.total_durations else "N/A",
             f"{result.average_completion_duration:.2f}",
