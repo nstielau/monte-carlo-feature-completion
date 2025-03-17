@@ -37,7 +37,8 @@ def generate_table(features, results, desired_duration):
     table.add_column("Min Duration", style="yellow")
     table.add_column("Max Duration", style="yellow")
 
-    for feature in features:
+    sorted_features = sorted(features, key=lambda f: results[f.name].success_rate, reverse=True)
+    for feature in sorted_features:
         result = results[feature.name]
         naive_success_rate = calculate_naive_success_rate(feature, desired_duration)
         color = "green" if naive_success_rate == 100 else "red" if naive_success_rate == 0 else "white"
