@@ -1,4 +1,4 @@
-from team import Team
+from models.team import Team
 
 class Story:
     def __init__(self, name, team):

@@ -1,7 +1,6 @@
-from story import Story
-
 import yaml
-from story import Story
+
+from models.story import Story
 
 class Feature:
     @staticmethod

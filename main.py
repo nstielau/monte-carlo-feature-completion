@@ -6,10 +6,10 @@ import fire
 from rich.console import Console
 from rich.live import Live
 from rich.table import Table
-from feature import Feature
-from simulation_result import SimulationResult
-from story import Story
-from team import Team
+from models.feature import Feature
+from models.simulation_result import SimulationResult
+from models.story import Story
+from models.team import Team
 
 
 results = {}
