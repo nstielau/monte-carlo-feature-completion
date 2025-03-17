@@ -41,7 +41,12 @@ def generate_table(features, results, desired_duration):
         result = results[feature.name]
         naive_success_rate = calculate_naive_success_rate(feature, desired_duration)
         color = "green" if naive_success_rate == 100 else "red" if naive_success_rate == 0 else "white"
-        success_rate_color = "green" if result.success_rate > 90 else "yellow" if result.success_rate >= 60 else "red"
+        success_rate_color = (
+            "green" if result.success_rate > 90 else
+            "yellow" if result.success_rate >= 60 else
+            "#FFA500" if result.success_rate >= 50 else  # Hex code for orange
+            "red"
+        )
         table.add_row(
             feature.name,
             f"[{success_rate_color}]{int(result.success_rate):>3}%[/]",
